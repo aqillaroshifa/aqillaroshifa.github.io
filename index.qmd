@@ -1,0 +1,153 @@
+---
+title: "Analisis Pengaruh Pertumbuhan Ekonomi terhadap Tingkat Kemiskinan di Sembilan Provinsi Negara Indonesia Tahun 2022"
+subtitle: "Metode Penelitian Politeknik APP Jakarta"
+author: "Aqilla Roshifa"
+date: 2024-09-01
+number-sections: true
+format:
+  html: default
+  docx: default
+---
+![](poltekapp.jpg)
+## Pendahuluan
+
+### Latar belakang
+
+Pada tahun 2022, Indonesia telah mengalami pertumbuhan ekonomi yang signifikan, yang didorong oleh berbagai faktor termasuk investasi, ekspor komoditas, dan konsumsi domestik. Kondisi ini dapat tercermin dari pertumbuhan Produk Domestik Bruto (PDB) yang kuat dan beragam sektor ekonomi yang berkembang.
+
+Meskipun pertumbuhan ekonomi yang positif, Indonesia masih menghadapi tantangan dalam mengurangi tingkat kemiskinan. Banyak provinsi di Indonesia masih memiliki tingkat kemiskinan yang tinggi, dengan masalah akses terhadap pendidikan, kesehatan, dan lapangan kerja yang memadai. Analisis tentang hubungan antara pertumbuhan ekonomi dan tingkat kemiskinan di provinsi-provinsi Indonesia pada tahun 2022 dapat memberikan wawasan yang berharga tentang tantangan dan peluang dalam upaya mengurangi kemiskinan di tingkat lokal dan nasional.
+
+### Ruang lingkup
+
+Identifikasi variabel yang digunakan untuk mengukur pertumbuhan ekonomi dan tingkat kemiskinan. Ini mungkin termasuk pertumbuhan Produk Domestik Regional Bruto (PDRB) atau Produk Domestik Bruto (PDB) provinsi sebagai indikator pertumbuhan ekonomi, serta tingkat kemiskinan atau indeks kemiskinan sebagai indikator kemiskinan.
+
+### Rumusan masalah
+
+1.Apakah terdapat hubungan yang signifikan antara pertumbuhan ekonomi provinsi-provinsi di Indonesia pada tahun 2022 dengan tingkat kemiskinan di setiap provinsi tersebut?
+2.Bagaimana pola hubungan antara pertumbuhan ekonomi dan tingkat kemiskinan di provinsi-provinsi Indonesia pada tahun 2022? Apakah ada perbedaan dalam pola ini antara provinsi-provinsi yang berbeda?
+
+### Tujuan dan manfaat penelitian
+
+Bagian ini merupakan jawaban yang akan dicapai dari pembahasan laporan, biasanya dirumuskan dari poin-poin masalah yang telah dijabarkan sebelumnya. Identifikasi siapa saja stakeholders yang dapat memanfaatkan penelitian ini.
+
+### Package
+
+Packages yang digunakan antara lain sebagai berikut:
+
+```{r}
+#| warning: false
+#| echo: true
+library(tidyverse)
+library(readxl)
+library(ggplot2)
+library("dplyr") 
+
+```
+
+## Studi pustaka
+
+Kuncoro, A., & Arifianto, A. (2019). Regional Economic Growth in Indonesia: Empirical Study on the Impact of Investment, Human Capital, and Infrastructure. Journal of International Development Cooperation, 15(1), 1-15. Penelitian ini dapat memberikan pemahaman tentang faktor-faktor yang memengaruhi pertumbuhan ekonomi regional di Indonesia, yang merupakan faktor yang penting dalam memahami hubungannya dengan kemiskinan.
+
+Badan Pusat Statistik (BPS). (2022). Statistik Kemiskinan di Indonesia. Data dan laporan resmi dari BPS menyediakan informasi penting tentang tingkat kemiskinan dan kondisi ekonomi di Indonesia pada tahun 2022, yang dapat digunakan sebagai dasar analisis.
+
+
+## Metode penelitian
+
+### Data
+
+|    provinsi    | penduduk  |
+|----------------|-----------|
+| Jawa Timur     | 4.181.000 |
+| Jawa Barat     | 4.071.000 |
+| Jawa tengah    | 3.831.000 |
+| Sumatra Utara  | 1.268.000 |
+| NTT            | 1.132.000 |
+| Sumatra Selatan| 1.045.000 |
+| Lampung        | 1.002.000 |
+| Papua          | 922.000   |
+| Banten         | 814.000   | 
+
+: Jumlah Penduduk Miskin Provinsi tahun 2022
+
+|    provinsi    | PDRB 2022 |
+|----------------|-----------|
+| Jawa Timur     |   4,76%   |
+| Jawa Barat     |   4,61%   |
+| Jawa tengah    |   5,24%   |
+| Sumatra Utara  |   5,26%   |
+| NTT            |   3,45%   |
+| Sumatra Selatan|   5,23%   |
+| Lampung        |   5,05%   |
+| Papua          |   2,70%   |
+| Banten         |   4,03%   |
+
+: Pertumbuhan Ekonomi Provinsi tahun 2022
+
+penelitian ini menggunakan data dati Badan Pusat Statistik (BPS)
+
+```{r}
+library("readxl")
+dat<-read_excel("2022EKOMIS.xlsx")
+head(dat)
+```
+
+```{r}
+ggplot(data=dat,aes(x=x,y=y))+
+  geom_point(color="black",size=2)+
+  labs(title="Pertumbuhan Ekonomi terhadap Tingkat Kemiskinan di Sembilan Provinsi Negara Indonesia Tahun 2022",
+       x="pertumbuhan ekonomi",
+       y="tingkat kemiskinan",
+       caption="sumber:Badan Pusat Statistik")+
+theme_classic()
+
+```
+
+### Metode analisis
+
+Metode yang dipilih adalah regresi univariat atau Ordinary Least Square (OLS) dengan 1 variabel independen. Penelitian ini bermaksud mencari hubungan antara pangaruh pertumbuhan ekonomi terhadap tingkat kemiskinan. Spesifikasi yang dilakukan adalah:
+
+
+
+$$y_{t}=\beta_0 + \beta_1 x_t+\mu_t
+$$ di mana $y_t$ adalah tingkat kemiskinan dan $x_t$ adalah pertumbuhan ekonomi.
+
+
+
+## Pembahasan
+
+### Pembahasan masalah
+
+Dengan menggunakan metode Ordinary Least Squares (OLS), penelitian ini 
+berfokus pada pangaruh pertumbuhan ekonomi terhadap tingkat kemiskinan di provinsi negara indonesia pada tahun 2022. Data penjualan yang terkumpul telah dianalisis menggunakan regresi, dan temuan utama dapat dijelaskan dalam format berikut.
+
+### Analisis masalah
+
+Hasil regresinya adalah
+
+```{r}
+library(readxl)
+dat<-read_excel("2022EKOMIS.xlsx")
+head(dat)
+```
+```{r}
+reg1<-lm(y~x,data=dat)
+summary(reg1)
+
+```
+Dari hasil output ini, dapat disimpulkan bahwa model regresi linear menunjukkan tingkat signifikansi yang tinggi secara statistik, serta variabel 'x' memiliki pengaruh yang signifikan terhadap variabel respons 'y'.
+
+
+## Kesimpulan
+
+Model regresi linear yang telah dilakukan menunjukkan bahwa pengaruh pertumbuhan ekonomi terhadap tingkat kemiskinan di sembilan provinsi negara Indonesia pada tahun 2022. Koefisien regresi positif menandakan bahwa peningkatan pertumbuhan ekonomiberkorelasi positif dengan peningkatan kemiskinan di sembilan provinsi negara Indonesia. Dengan demikian, dapat disimpulkan bahwa pengaruh pertumbuhan ekonomi memiliki dampak yang nyata terhadap tingkat kemiskinan di sembilan provinsi negara Indonesia tahun 20022.
+
+## Referensi
+
+https://www.bps.go.id/id/pressrelease/2023/02/06/1997/ekonomi-indonesia-tahun-2022-tumbuh-5-31-persen.html
+Badan Pusat Statistik (BPS). (2022). Statistik Kemiskinan di Indonesia.
+https://media.neliti.com/media/publications/43066-ID-pertumbuhan-ekonomi-dan-kemiskinan-di-indonesia.pdf
+https://vs-dprexternal3.dpr.go.id/index.php/ekp/article/view/94/61
+https://www.cnbcindonesia.com/research/20230207100421-128-411663/bukan-dki-ekonomi-daerah-ini-tumbuh-22-tertinggi-di-ri
+https://journal.unnes.ac.id/nju/index.php/jejak/article/download/22816/10221
+Kuncoro, A., & Arifianto, A. (2019). Regional Economic Growth in Indonesia: Empirical Study on the Impact of Investment, Human Capital, and Infrastructure. Journal of International Development Cooperation, 15(1), 1-15.
+
